@@ -95,6 +95,7 @@ D:\Programming\Projects\HeatAlertPRSimulation\backend\obj\Debug\net10.0\backend.
 D:\Programming\Projects\HeatAlertPRSimulation\backend\obj\Debug\net10.0\backend.genruntimeconfig.cache
 D:\Programming\Projects\HeatAlertPRSimulation\backend\obj\Debug\net10.0\ref\backend.dll
 D:\Programming\Projects\HeatAlertPostGre\backend\bin\Debug\net10.0\appsettings.json
+D:\Programming\Projects\HeatAlertPostGre\backend\bin\Debug\net10.0\sharedresource\talisaycitycebu.json
 D:\Programming\Projects\HeatAlertPostGre\backend\bin\Debug\net10.0\backend.staticwebassets.endpoints.json
 D:\Programming\Projects\HeatAlertPostGre\backend\bin\Debug\net10.0\backend.exe
 D:\Programming\Projects\HeatAlertPostGre\backend\bin\Debug\net10.0\backend.deps.json
@@ -112,6 +113,7 @@ D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\backend.Assem
 D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\backend.AssemblyInfo.cs
 D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\backend.csproj.CoreCompileInputs.cache
 D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\backend.MvcApplicationPartsAssemblyInfo.cache
+D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\backend.sourcelink.json
 D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\rjimswa.dswa.cache.json
 D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 D:\Programming\Projects\HeatAlertPostGre\backend\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json

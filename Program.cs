@@ -6,15 +6,21 @@ using Npgsql;
 var builder = WebApplication.CreateBuilder(args);
 
 // This looks for a Render Environment Variable first
-string connString = Environment.GetEnvironmentVariable("postgresql://postgre:XyfT6nLczZT4Ao8N5SpdPl5jCj4tDrEV@dpg-d6rb9q7afjfc73f46830-a/npqsql") 
+// "DATABASE_URL" is the name of the key you will create in Render's dashboard
+string rawConnUrl = Environment.GetEnvironmentVariable("DATABASE_URL") 
                     ?? builder.Configuration.GetConnectionString("DefaultConnection")!;
+
+// Use the parser we discussed earlier to make sure Npgsql can read it
+string connString = rawConnUrl.StartsWith("postgres://") || rawConnUrl.StartsWith("postgresql://")
+    ? ConvertPostgresUrlToConnString(rawConnUrl)
+    : rawConnUrl;
 
 string botToken = builder.Configuration["BotSettings:TelegramToken"]!;
 
 // 1. ROBUST PATH CHECKING
 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
 // We try the most likely path first (3 levels up from bin/Debug/netX.0)
-string jsonPath = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", "sharedresource", "talisaycitycebu.json"));
+string jsonPath = Path.GetFullPath(Path.Combine(baseDir, "sharedresource", "talisaycitycebu.json"));
 
 // FALLBACK: If 3 levels fails, try 4 levels (sometimes VS structure varies)
 if (!File.Exists(jsonPath)) {
@@ -152,6 +158,14 @@ app.Run();
         // Fallback to City Hall
         return (10.2447, 123.8480);
     }
+}
+
+
+string ConvertPostgresUrlToConnString(string url)
+{
+    var uri = new Uri(url);
+    var userInfo = uri.UserInfo.Split(':');
+    return $"Host={uri.Host};Port={uri.Port};Username={userInfo[0]};Password={userInfo[1]};Database={uri.AbsolutePath.Trim('/')};SslMode=Require;Trust Server Certificate=true";
 }
 
 public static class GlobalData {
