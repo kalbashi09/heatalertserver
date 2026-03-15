@@ -1,23 +1,20 @@
-# 1. Use the .NET SDK to build the code
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
-# 2. Copy the project file and restore libraries
-COPY *.csproj ./
+# Look inside the NEW folder name for the project file
+COPY heatalertserver/*.csproj ./
 RUN dotnet restore
 
-# 3. Copy everything else and build the release
-COPY . ./
+# Look inside the NEW folder name for the source code
+COPY heatalertserver/ ./
 RUN dotnet publish -c Release -o out
 
-# 4. Use the tiny Runtime image to run the app
+# Stage 2: Run
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-# 5. Expose the port Render uses
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
-
-# 6. Start the app (Make sure this matches your project name!)
-ENTRYPOINT ["dotnet", "HeatAlert.dll"]
+# IMPORTANT: The DLL name is usually the same as the .csproj filename
+# If your file is heatalertserver.csproj, this is correct:
+ENTRYPOINT ["dotnet", "heatalertserver.dll"]

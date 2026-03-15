@@ -20,11 +20,12 @@ string botToken = builder.Configuration["BotSettings:TelegramToken"]!;
 // 1. ROBUST PATH CHECKING
 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
 // We try the most likely path first (3 levels up from bin/Debug/netX.0)
-string jsonPath = Path.GetFullPath(Path.Combine(baseDir, "sharedresource", "talisaycitycebu.json"));
+// Simplest way: Look in the current folder, then look in the subfolder
+string jsonPath = Path.Combine(baseDir, "sharedresource", "talisaycitycebu.json");
 
-// FALLBACK: If 3 levels fails, try 4 levels (sometimes VS structure varies)
+// If it's not in a subfolder (sometimes Docker flattens files), look in root
 if (!File.Exists(jsonPath)) {
-    jsonPath = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", "..", "sharedresource", "talisaycitycebu.json"));
+    jsonPath = Path.Combine(baseDir, "talisaycitycebu.json");
 }
 
 string cachedJson = "";
